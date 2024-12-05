@@ -8,6 +8,8 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import com.connorlinfoot.actionbarapi.ActionBarAPI;
+
 import me.money.APIs.SubCommand;
 import me.money.commands.subcommands.AddCMD;
 import me.money.commands.subcommands.GiveCMD;
@@ -39,6 +41,8 @@ public class CommandMoney implements CommandExecutor {
 
 			if (args.length == 0) {
 				moneyMenu.abrirMenu(p);
+				
+				ActionBarAPI.sendActionBar(p, ChatColor.GREEN + "Menu aberto com sucesso!");
 			} else if (args.length > 0) {
 				for (int i = 0; i < getSubCommands().size(); i++) {
 					if (args[0].equalsIgnoreCase(getSubCommands().get(i).getName())) {

@@ -14,6 +14,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import me.money.commands.CommandMoney;
 import me.money.commands.templates.MoneyMenu;
 import me.money.database.DatabaseSetup;
+import me.money.events.MoneyEvents;
 import net.milkbowl.vault.economy.Economy;
 
 public class Main extends JavaPlugin {
@@ -39,6 +40,7 @@ public class Main extends JavaPlugin {
 		getCommand("money").setExecutor(new CommandMoney());
 		
 		pm.registerEvents(new MoneyMenu(), this);
+		pm.registerEvents(new MoneyEvents(), this);
 
 		final long loadms = System.currentTimeMillis() - start_ms;
 		logger.log(Level.INFO, "[MythicMoney] Loaded in %s" + loadms + "ms");

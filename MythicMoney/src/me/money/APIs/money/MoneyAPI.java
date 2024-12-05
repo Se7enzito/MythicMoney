@@ -116,7 +116,55 @@ public class MoneyAPI {
                 }
             }
         }
+        
+        return false;
+    }
+    
+    public static boolean adicionarPlayerTabela(String uuid) {
+        String query = "INSERT INTO player_stats (uuid) VALUES (?)";
+        
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, uuid);
+            return preparedStatement.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        return false;
+    }
+    
+    public static boolean verificarSePlayerExiste(String uuid) {
+        String query = "SELECT 1 FROM player_stats WHERE uuid = ?";
+        
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, uuid);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            
+            return resultSet.next();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
         return false;
     }
 	
+    public static boolean adicionarPlayerComVerificacao(String uuid) {
+        if (verificarSePlayerExiste(uuid)) {
+            return false;
+        }
+
+        String query = "INSERT INTO player_stats (uuid) VALUES (?)";
+        
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, uuid);
+            return preparedStatement.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        return false;
+    }
 }
