@@ -1,0 +1,6 @@
+name: MythicMoney
+version: 0.1
+author: Se7enzito
+main: me.money.Main
+commands:
+  money:
